@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "EventLog.h"
+#include "Scenes/EventLog.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Scenes;
