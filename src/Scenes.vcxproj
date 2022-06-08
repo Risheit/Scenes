@@ -167,11 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Event.hpp" />
-    <ClInclude Include="EventLog.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="ScriptReader.h" />
-    <ClInclude Include="Section.h" />
+    <ClInclude Include="..\include\Scenes\Event.hpp" />
+    <ClInclude Include="..\include\Scenes\EventLog.h" />
+    <ClInclude Include="..\include\Scenes\Line.h" />
+    <ClInclude Include="..\include\Scenes\ScriptReader.h" />
+    <ClInclude Include="..\include\Scenes\Section.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

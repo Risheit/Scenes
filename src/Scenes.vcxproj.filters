@@ -18,19 +18,19 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Line.h">
+    <ClInclude Include="..\include\Scenes\Event.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Section.h">
+    <ClInclude Include="..\include\Scenes\EventLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptReader.h">
+    <ClInclude Include="..\include\Scenes\Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventLog.h">
+    <ClInclude Include="..\include\Scenes\ScriptReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Event.hpp">
+    <ClInclude Include="..\include\Scenes\Section.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

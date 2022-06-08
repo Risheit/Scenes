@@ -2,9 +2,9 @@
 
 namespace Scenes
 {
-	typedef std::string LogNameType;
-	typedef std::vector<size_t> LogResultType;
-	typedef std::map<LogNameType, LogResultType> LogType;
+	using LogNameType = std::string;
+	using LogResultType = std::vector<size_t>;
+	using LogType = std::map<LogNameType, LogResultType>;
 
 	class EventLog
 	{
