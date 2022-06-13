@@ -1,158 +1,40 @@
-set(PROJECT_NAME Scenes)
-
-################################################################################
-# Source groups
-################################################################################
-set(Header_Files
-    "../include/Scenes/Event.hpp"
-    "../include/Scenes/EventLog.h"
-    "../include/Scenes/Line.h"
-    "../include/Scenes/ScriptReader.h"
-    "../include/Scenes/Section.h"
+set(HEADER_FILES
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Event.hpp"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/EventLog.h"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Line.h"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/ScriptReader.h"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Section.h"
     "pch.h"
 )
-source_group("Header Files" FILES ${Header_Files})
 
-set(Source_Files
-    "EventLog.cpp"
-    "Line.cpp"
-    "pch.cpp"
-    "ScriptReader.cpp"
-    "Section.cpp"
+set(SOURCE_FILES
+"EventLog.cpp"
+"Line.cpp"
+"pch.cpp"
+"ScriptReader.cpp"
+"Section.cpp"
 )
-source_group("Source Files" FILES ${Source_Files})
 
 set(ALL_FILES
-    ${Header_Files}
-    ${Source_Files}
+    ${HEADER_FILES}
+    ${SOURCE_FILES}
 )
 
-################################################################################
-# Target
-################################################################################
-add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+## Set Visual Studio Source Groups
+source_group("Header Files" FILES ${HEADER_FILES})
+source_group("Source Files" FILES ${SOURCE_FILES})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE
+
+## Create Target
+add_library(${CMAKE_PROJECT_NAME} STATIC ${ALL_FILES})
+
+## Target Dependencies
+target_precompile_headers(${CMAKE_PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>"
 )
 
-use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
-set(ROOT_NAMESPACE Scenes)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    VS_GLOBAL_KEYWORD "Win32Proj"
-)
-################################################################################
-# Output directory
-################################################################################
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        OUTPUT_DIRECTORY_DEBUG   "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/"
-        OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/"
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
+        "${CMAKE_SOURCE_DIR}/external;"
+        "${CMAKE_SOURCE_DIR}/include/Scenes"
     )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        OUTPUT_DIRECTORY_DEBUG   "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/"
-        OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/"
-    )
-endif()
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
-    )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
-    )
-endif()
-################################################################################
-# Include directories
-################################################################################
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-    target_include_directories(${PROJECT_NAME} PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/../lib;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../include/Scenes"
-    )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-    target_include_directories(${PROJECT_NAME} PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/../lib;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../include/Scenes"
-    )
-endif()
-
-################################################################################
-# Compile definitions
-################################################################################
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE
-        "$<$<CONFIG:Debug>:"
-            "_DEBUG"
-        ">"
-        "$<$<CONFIG:Release>:"
-            "NDEBUG"
-        ">"
-        "_LIB;"
-        "UNICODE;"
-        "_UNICODE"
-    )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE
-        "$<$<CONFIG:Debug>:"
-            "_DEBUG"
-        ">"
-        "$<$<CONFIG:Release>:"
-            "NDEBUG"
-        ">"
-        "WIN32;"
-        "_LIB;"
-        "UNICODE;"
-        "_UNICODE"
-    )
-endif()
-
-################################################################################
-# Compile and link options
-################################################################################
-if(MSVC)
-    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-        target_compile_options(${PROJECT_NAME} PRIVATE
-            $<$<CONFIG:Release>:
-                /Oi;
-                /Gy
-            >
-            /permissive-;
-            /sdl;
-            /W3;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
-            ${DEFAULT_CXX_EXCEPTION_HANDLING}
-        )
-    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-        target_compile_options(${PROJECT_NAME} PRIVATE
-            $<$<CONFIG:Release>:
-                /Oi;
-                /Gy
-            >
-            /permissive-;
-            /sdl;
-            /W3;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
-            ${DEFAULT_CXX_EXCEPTION_HANDLING}
-        )
-    endif()
-    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
-        target_link_options(${PROJECT_NAME} PRIVATE
-            $<$<CONFIG:Release>:
-                /OPT:REF;
-                /OPT:ICF
-            >
-        )
-    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
-        target_link_options(${PROJECT_NAME} PRIVATE
-            $<$<CONFIG:Release>:
-                /OPT:REF;
-                /OPT:ICF
-            >
-        )
-    endif()
-endif()
 
