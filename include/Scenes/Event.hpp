@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 #include <functional>
 #include <type_traits>
 #include <typeinfo>
@@ -25,7 +26,7 @@ namespace Scenes
 
 		virtual std::string eventString() const;	
 
-		const type_info& targetType() const;
+		const std::type_info& targetType() const;
 
 		const std::string& name() const;
 
@@ -51,7 +52,7 @@ namespace Scenes
 	}
 
 	template<class Ret, class ...Args>
-	inline const type_info& Event<Ret(Args...)>::targetType() const
+	inline const std::type_info& Event<Ret(Args...)>::targetType() const
 	{
 		return _function.target_type();
 	}
