@@ -1,7 +1,7 @@
 set(HEADER_FILES
     "${CMAKE_SOURCE_DIR}/include/Scenes/Event.hpp"
     "${CMAKE_SOURCE_DIR}/include/Scenes/EventLog.h"
-    "${CMAKE_SOURCE_DIR}/include/Scenes/Line.h"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Line.hpp"
     "${CMAKE_SOURCE_DIR}/include/Scenes/ScriptReader.h"
     "${CMAKE_SOURCE_DIR}/include/Scenes/Section.h"
     "pch.h"
@@ -9,7 +9,6 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
 "EventLog.cpp"
-"Line.cpp"
 "pch.cpp"
 "ScriptReader.cpp"
 "Section.cpp"
