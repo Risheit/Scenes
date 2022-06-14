@@ -2,6 +2,7 @@
 #include <string>
 #include <functional>
 #include <type_traits>
+#include <typeinfo>
 #include "EventLog.h"
 
 namespace Scenes
