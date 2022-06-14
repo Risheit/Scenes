@@ -16,7 +16,7 @@ namespace Scenes
 	/// <summary>
 	/// </summary>
 	/// <returns>Vector of call times if query succeeds, empty vector if fails.</returns>
-	LogResultType EventLog::queryLog(LogNameType eventString) const
+	LogResultType EventLog::query(LogNameType eventString) const
 	{
 		auto it = _log.find(eventString);
 

@@ -15,10 +15,12 @@ namespace Scenes
 		EventLog(
 			const size_t& linesRead
 		);
+
 		void addLog(
 			LogNameType eventString
 		);
-		LogResultType queryLog(
+
+		LogResultType query(
 			LogNameType eventString
 		) const;
 
