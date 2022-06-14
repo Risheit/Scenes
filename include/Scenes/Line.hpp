@@ -7,7 +7,10 @@ namespace Scenes
 	template<class Ret, class ...Args>
 	struct Line
 	{
-		Line(std::string text, Event<Ret(Args...)> event);
+		Line(
+			std::string text, 
+			Event<Ret(Args...)> event
+		);
 
 		const std::string text;
 		const Event<Ret(Args...)> storedEvent;
