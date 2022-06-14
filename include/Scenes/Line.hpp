@@ -5,11 +5,16 @@
 namespace Scenes
 {
 	template<class Ret, class ...Args>
-	class Line
+	struct Line
 	{
+		Line(std::string text, Event<Ret(Args...)> event);
 
-	private:
-		std::string	text;
-		Event<Ret(Args...)> storedEvent;
+		const std::string text;
+		const Event<Ret(Args...)> storedEvent;
 	};
+
+	template<class Ret, class ...Args>
+	inline Line<Ret, Args...>::Line(std::string text, Event<Ret(Args...)> event)
+		: text(text), storedEvent(event)
+	{}
 }
