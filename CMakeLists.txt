@@ -14,8 +14,8 @@ if (ENABLE_TESTING)
     # Include Google Test 
     include(FetchContent)
     FetchContent_Declare(
-        googletest https://github.com/google/googletest.git
-        GIT_REPOSITORY 
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929
     )
     # For Windows: Prevent overriding the parent project's compiler/linker settings
