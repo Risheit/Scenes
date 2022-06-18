@@ -10,12 +10,12 @@ protected:
 	EventLog log = EventLog(linesRead);
 };
 
-TEST_F(EventLogTests, AddAndQueryLog)
+TEST_F(EventLogTests, AddAndQuery)
 {
 	LogNameType testStr1 = "Test Event 1";
 	LogResultType expected;
 
-	EXPECT_EQ(expected, log.queryLog(testStr1));
+	EXPECT_EQ(expected, log.query(testStr1));
 
 	log.addLog(testStr1);
 	expected.push_back(linesRead);
@@ -23,5 +23,5 @@ TEST_F(EventLogTests, AddAndQueryLog)
 	log.addLog(testStr1);
 	expected.push_back(linesRead);
 
-	EXPECT_EQ(expected, log.queryLog(testStr1));
+	EXPECT_EQ(expected, log.query(testStr1));
 }
