@@ -4,6 +4,7 @@
 #include <functional>
 #include <type_traits>
 #include <typeinfo>
+#include <stdexcept>
 #include "EventLog.h"
 
 namespace Scenes
@@ -37,17 +38,25 @@ namespace Scenes
 		EventLog& _eventLogRef;
 	};
 
+	/// <typeparam name="Ret">Return value.</typeparam>
+	/// <typeparam name="...Args">Arguments.</typeparam>
+	/// <param name="func">Contained functor.</param>
+	/// <param name="name">The name of the event. Cannot contain ','.</param>
+	/// <param name="eventLogRef">Refernce to log to store event calls in.</param>
 	template<typename Ret, typename ...Args>
 	inline Event<Ret(Args...)>::Event(std::function<Ret(Args...)> func, std::string name,
 		EventLog& eventLogRef)
 		: _function(func), _name(name), _returnValue(Ret()), _eventLogRef(eventLogRef)
-	{}
+	{
+		if (name.find(",") != std::string::npos)
+			throw std::invalid_argument{ "Event name cannot contain ','." };
+	}
 
 	template<class Ret, class ...Args>
 	inline std::string Event<Ret(Args...)>::eventString() const
 	{
 		std::stringstream ss;
-		ss << _name << " " << _returnValue;
+		ss << _name << "," << _returnValue;
 		return ss.str();
 	}
 
