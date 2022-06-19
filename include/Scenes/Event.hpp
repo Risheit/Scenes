@@ -2,7 +2,6 @@
 #include <string>
 #include <sstream>
 #include <functional>
-#include <type_traits>
 #include <typeinfo>
 #include <stdexcept>
 #include "EventLog.h"
