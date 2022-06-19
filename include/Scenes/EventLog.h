@@ -24,6 +24,10 @@ namespace Scenes
 			LogNameType eventString
 		) const;
 
+		std::vector<LogNameType> findEventCalls(
+			LogNameType searchTerm
+		) const;
+
 	public:
 		// Map ordered with EventString -> [how many lines passed each call]
 		LogType _log;
