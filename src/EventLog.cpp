@@ -16,7 +16,7 @@ namespace Scenes
 	/// <summary>
 	///		Query the call times of a stored log name.
 	/// </summary>
-	/// <returns>Vector of call times if query succeeds, empty vector if fails.</returns>
+	/// <returns>A Vector of call times if query succeeds, empty vector if fails.</returns>
 	LogResultType EventLog::query(LogNameType eventString) const
 	{
 		auto it = _log.find(eventString);
@@ -27,17 +27,20 @@ namespace Scenes
 		return it->second;
 	}
 
-	/// <summary>
-	///		Find log names where a given search term occurs somewhere within the name.
-	/// </summary>
-	/// <returns>Vector of contained log name containing search term.</returns>
-	std::vector<LogNameType> EventLog::findEventCalls(LogNameType searchTerm) const
+	/// <returns>
+	///		A vector of eventStrings in the form "name, result" given the name.
+	///		If none are found, returns an empty vector.
+	/// </returns>
+	std::vector<LogNameType> EventLog::findEventCalls(LogNameType eventName) const
 	{
 		std::vector<LogNameType> results;
 
-		for (const auto &it : _log)
-			if (it.first.contains(searchTerm))
+		for (const auto& it : _log)
+		{
+			auto cutoff = it.first.find(',');
+			if (it.first.substr(0, cutoff) == eventName)
 				results.push_back(it.first);
+		}
 
 		return results;
 	}
