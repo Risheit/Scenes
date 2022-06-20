@@ -46,7 +46,6 @@ TEST_F(EventLogTests, FindEventCorrectly)
 	log.addLog(", 19");
 	log.addLog("Event, 19");
 
-	// Vector is ordered in 
 	std::vector<Scenes::LogNameType> expected{
 		"Event, 10",
 		"Event, 1",
