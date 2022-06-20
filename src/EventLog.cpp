@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "EventLog.h"
-#include <map>
 
 namespace Scenes
 {

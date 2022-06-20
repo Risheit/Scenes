@@ -1,5 +1,5 @@
 #pragma once
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 
@@ -7,7 +7,7 @@ namespace Scenes
 {
 	using LogNameType = std::string;
 	using LogResultType = std::vector<size_t>;
-	using LogType = std::map<LogNameType, LogResultType>;
+	using LogType = std::unordered_map<LogNameType, LogResultType>;
 
 	class EventLog
 	{
