@@ -2,36 +2,19 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include "Log.h"
 
 namespace Scenes
 {
-	using LogNameType = std::string;
-	using LogResultType = std::vector<size_t>;
-	using LogType = std::unordered_map<LogNameType, LogResultType>;
-
-	class EventLog
+	class EventLog : public Log
 	{
 	public:
 		EventLog(
 			const size_t& linesRead
 		);
 
-		void addLog(
-			LogNameType eventString
-		);
-
-		LogResultType query(
-			LogNameType eventString
-		) const;
-
-		std::vector<LogNameType> findEventCalls(
+		std::vector<LogNameType> findKeys(
 			LogNameType searchTerm
-		) const;
-
-	public:
-		// Map ordered with EventString -> [how many lines passed each call]
-		LogType _log;
-		const size_t& _linesRead;
-		
+		) const override;
 	};
 }

@@ -4,6 +4,7 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     "EventTests.cpp"
+    "Log.cpp"
     "EventLogTests.cpp"
 )
 

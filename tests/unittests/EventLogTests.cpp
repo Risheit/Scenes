@@ -8,7 +8,7 @@ class EventLogTests : public ::testing::Test
 {
 protected:
 	size_t linesRead = 0;
-	EventLog log = EventLog(linesRead);
+	EventLog log{ linesRead };
 };
 
 TEST_F(EventLogTests, AddAndQuery)
@@ -51,12 +51,12 @@ TEST_F(EventLogTests, FindEventCorrectly)
 		"Event, 1",
 		"Event, 19"
 	};
-	auto actual = log.findEventCalls("Event");
+	auto actual = log.findKeys("Event");
 	
 	// Order is irrelavent 
 	std::sort(expected.begin(), expected.end());
 	std::sort(actual.begin(), actual.end());
 
 	EXPECT_EQ(expected, actual);
-	EXPECT_EQ(std::vector<Scenes::LogNameType>(), log.findEventCalls("NonExistant"));
+	EXPECT_EQ(std::vector<Scenes::LogNameType>(), log.findKeys("NonExistant"));
 }
