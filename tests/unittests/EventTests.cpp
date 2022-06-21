@@ -17,8 +17,8 @@ protected:
 
 TEST_F(EventTests, CallsCorrectly)
 {
-	EXPECT_EQ(std::string("4"), eve(4));
-	EXPECT_EQ(std::string("123499"), eve(123499));
+	EXPECT_EQ(4, eve(4));
+	EXPECT_EQ(123499, eve(123499));
 	EXPECT_EQ(0, noArgs());
 }
 
