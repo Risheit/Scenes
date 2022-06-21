@@ -4,8 +4,8 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     "EventTests.cpp"
-    "Log.cpp"
     "EventLogTests.cpp"
+    "LogTests.cpp"
 )
 
 set(ALL_FILES
@@ -20,3 +20,4 @@ source_group("Source Files" FILES ${SOURCE_FILES})
 ## Define Tests
 create_gtest(EVENT_TEST EventTests.cpp)
 create_gtest(EVENT_LOG_TEST EventLogTests.cpp)
+create_gtest(LOG_TEST LogTests.cpp)

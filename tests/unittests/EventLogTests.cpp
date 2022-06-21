@@ -1,10 +1,12 @@
-#include "Scenes/EventLog.h"
 #include <algorithm>
+#include <ranges>
 #include <gtest/gtest.h>
+
+#include "Scenes/EventLog.h"
 
 using namespace Scenes;
 
-class EventLogTests : public ::testing::Test
+class EventLogTests : public testing::Test
 {
 protected:
 	size_t linesRead = 0;
@@ -13,7 +15,7 @@ protected:
 
 TEST_F(EventLogTests, AddAndQuery)
 {
-	LogNameType testStr1 = "Test Event 1";
+	const LogNameType testStr1 = "Test Event 1";
 	LogResultType expected;
 
 	EXPECT_EQ(expected, log.query(testStr1));
@@ -46,17 +48,17 @@ TEST_F(EventLogTests, FindEventCorrectly)
 	log.addLog(", 19");
 	log.addLog("Event, 19");
 
-	std::vector<Scenes::LogNameType> expected{
+	std::vector<LogNameType> expected{
 		"Event, 10",
 		"Event, 1",
 		"Event, 19"
 	};
 	auto actual = log.findKeys("Event");
 	
-	// Order is irrelavent 
-	std::sort(expected.begin(), expected.end());
-	std::sort(actual.begin(), actual.end());
+	// Order is irrelevant 
+	std::ranges::sort(expected);
+	std::ranges::sort(actual);
 
 	EXPECT_EQ(expected, actual);
-	EXPECT_EQ(std::vector<Scenes::LogNameType>(), log.findKeys("NonExistant"));
+	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistant"));
 }

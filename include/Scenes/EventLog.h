@@ -1,20 +1,18 @@
 #pragma once
-#include <unordered_map>
-#include <vector>
-#include <string>
+
 #include "Log.h"
 
 namespace Scenes
 {
-	class EventLog : public Log
+	class EventLog final : public Log
 	{
 	public:
-		EventLog(
+		explicit EventLog(
 			const size_t& linesRead
 		);
 
-		std::vector<LogNameType> findKeys(
-			LogNameType searchTerm
+		[[nodiscard]] std::vector<LogNameType> findKeys(
+			const LogNameType& eventName
 		) const override;
 	};
 }

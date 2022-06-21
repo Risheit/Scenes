@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace Scenes
 {
@@ -9,20 +12,27 @@ namespace Scenes
 	class Log
 	{
 	public:
-		Log(
+
+		Log(const Log&) = delete;
+		Log& operator=(const Log&) = delete;
+		Log(Log&&) = default;
+		Log& operator=(const Log&&) = delete;
+		virtual ~Log() = default;
+
+		explicit Log(
 			const size_t& linesRead
 		);
 
 		virtual void addLog(
-			LogNameType eventString
+			const LogNameType& name
 		);
 
-		virtual LogResultType query(
-			LogNameType eventString
+		[[nodiscard]] virtual LogResultType query(
+			const LogNameType& name
 		) const;
 
-		virtual std::vector<LogNameType> findKeys(
-			LogNameType searchTerm
+		[[nodiscard]] virtual std::vector<LogNameType> findKeys(
+			const LogNameType& searchTerm
 		) const;
 
 	protected:

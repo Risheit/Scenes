@@ -6,12 +6,12 @@
 using namespace Scenes;
 
 // Demonstrate some basic assertions.
-class EventTests : public ::testing::Test
+class EventTests : public testing::Test
 {
 protected:
 	size_t linesRead{ 0 };
 	EventLog log{ EventLog(linesRead) };
-	Event<int> eve{ [](int a) -> int { return a; }, "test", log };
+	Event<int> eve{ [](const int a) -> int { return a; }, "test", log };
 	Event<> noArgs{ []() -> int { return 0; }, "test", log };
 };
 
