@@ -7,16 +7,11 @@
 #ifndef PCH_H
 #define PCH_H
 
-// add headers that you want to pre-compile here
 #include <iostream>
-#include <algorithm>
-#include <functional>
-#include <unordered_set>
-#include <string>
-#include <vector>
-#include <map>
 #include <memory>
-#include <functional>
-
+#include <ranges>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 #endif //PCH_H
