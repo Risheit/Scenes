@@ -3,11 +3,8 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
-
-// ReSharper disable all
-// typeinfo incorrectly assumed to be unused
+// ReSharper disable once CppUnusedIncludeDirective
 #include <typeinfo> 
-// ReSharper enable all
 
 #include "EventLog.h"
 
