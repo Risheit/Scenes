@@ -25,7 +25,6 @@ if (ENABLE_TESTING)
     # Test Creation Function
     #   TEST_NAME - name of added test/executable
     #   TEST_FILE - name of source file containing test
-
     function(create_gtest TEST_NAME TEST_FILE)
         add_executable(${TEST_NAME} ${TEST_FILE})
         target_link_libraries(${TEST_NAME} ${CMAKE_PROJECT_NAME} gtest_main)
