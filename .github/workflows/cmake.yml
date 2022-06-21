@@ -3,9 +3,7 @@ name: CMake
 on:
   push:
     branches: [ "master", "debug/**" ]
-  pull_request:
-    branches: [ "master" ]
-
+    
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Debug
@@ -14,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        compiler: [gcc, clang]
+        compiler: [gcc]
         os: [ubuntu-22.04, windows-latest]
         
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
