@@ -5,6 +5,7 @@
 #include <string>
 // ReSharper disable once CppUnusedIncludeDirective
 #include <typeinfo> 
+#include <utility>
 
 #include "EventLog.h"
 
