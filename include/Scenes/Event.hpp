@@ -4,6 +4,11 @@
 #include <stdexcept>
 #include <string>
 
+// ReSharper disable all
+// typeinfo incorrectly assumed to be unused
+#include <typeinfo> 
+// ReSharper enable all
+
 #include "EventLog.h"
 
 namespace Scenes
