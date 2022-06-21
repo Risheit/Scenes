@@ -42,9 +42,9 @@ TEST_F(EventLogTests, FindEventCorrectly)
 	log.addLog("Event2, 10");
 	log.addLog("Event2, 1");
 	log.addLog("Event2, 19");
-	
+
 	log.addLog("Event3, ");
-	
+
 	log.addLog(", 19");
 	log.addLog("Event, 19");
 
@@ -54,11 +54,11 @@ TEST_F(EventLogTests, FindEventCorrectly)
 		"Event, 19"
 	};
 	auto actual = log.findKeys("Event");
-	
+
 	// Order is irrelevant 
 	std::ranges::sort(expected);
 	std::ranges::sort(actual);
 
 	EXPECT_EQ(expected, actual);
-	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistant"));
+	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistent"));
 }

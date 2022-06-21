@@ -36,7 +36,7 @@ namespace Scenes
 	{
 		std::vector<LogNameType> results;
 
-		for (const auto &key : _log | std::views::keys)
+		for (const auto& key : _log | std::views::keys)
 			if (key.find(searchTerm) != std::string::npos)
 				results.push_back(key);
 

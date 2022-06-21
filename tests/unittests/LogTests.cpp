@@ -6,7 +6,7 @@
 
 using namespace Scenes;
 
-class LogTests: public testing::Test
+class LogTests : public testing::Test
 {
 protected:
 	size_t linesRead = 0;
@@ -61,5 +61,5 @@ TEST_F(LogTests, FindLogCorrectly)
 	std::ranges::sort(actual);
 
 	EXPECT_EQ(expected, actual);
-	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistant"));
+	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistent"));
 }

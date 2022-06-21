@@ -4,25 +4,26 @@
 #include <stdexcept>
 #include <string>
 // ReSharper disable once CppUnusedIncludeDirective
-#include <typeinfo> 
+#include <typeinfo>
 #include <utility>
 
 #include "EventLog.h"
 
 namespace Scenes
 {
-	template<class ...Args> class Event
+	template<class ...Args>
+	class Event
 	{
 	public:
 		Event(
-			std::function<int(Args...)> func,
-			const std::string &name,
+			std::function<int(Args ...)> func,
+			const std::string& name,
 			EventLog& eventLogRef
-			);
+		);
 
 		int operator()(
-			Args... args
-			);
+			Args ... args
+		);
 
 		[[nodiscard]] std::string eventString() const;
 
@@ -31,7 +32,7 @@ namespace Scenes
 		[[nodiscard]] const std::string& name() const;
 
 	protected:
-		const std::function<int(Args...)> _function;
+		const std::function<int(Args ...)> _function;
 		const std::string _name;
 		int _returnValue;
 		EventLog& _eventLogRef;
@@ -43,8 +44,10 @@ namespace Scenes
 	/// <param name="name">The name of the event. Cannot contain ','.</param>
 	/// <param name="eventLogRef">Reference to log to store event calls in.</param>
 	template<class ...Args>
-	Event<Args...>::Event(std::function<int(Args...)> func, const std::string &name,
-	                      EventLog& eventLogRef)
+	Event<Args...>::Event(
+		std::function<int(Args ...)> func, const std::string& name,
+		EventLog& eventLogRef
+	)
 		: _function(std::move(func)), _name(name), _returnValue(int()), _eventLogRef(eventLogRef)
 	{
 		if (name.find(',') != std::string::npos)
@@ -78,5 +81,4 @@ namespace Scenes
 		_eventLogRef.addLog(eventString());
 		return _returnValue;
 	}
-
 }

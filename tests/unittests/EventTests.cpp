@@ -33,8 +33,8 @@ TEST_F(EventTests, CallsLoggedCorrectly)
 	(void)eve(6);
 	eveCallExpected.push_back(linesRead);
 	EXPECT_EQ(eveCallExpected, log.query(eve.eventString()));
-	
-	
+
+
 	LogResultType noArgsCallExpected;
 	EXPECT_EQ(noArgsCallExpected, log.query(noArgs.eventString()));
 

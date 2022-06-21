@@ -12,7 +12,6 @@ namespace Scenes
 	class Log
 	{
 	public:
-
 		Log(const Log&) = delete;
 		Log& operator=(const Log&) = delete;
 		Log(Log&&) = default;
