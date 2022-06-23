@@ -44,11 +44,10 @@ namespace Scenes
 	/// <param name="name">The name of the event. Cannot contain ','.</param>
 	/// <param name="eventLogRef">Reference to log to store event calls in.</param>
 	template<class ...Args>
-	Event<Args...>::Event(
-		std::function<int(Args ...)> func, const std::string& name,
-		EventLog& eventLogRef
-	)
-		: _function(std::move(func)), _name(name), _returnValue(int()), _eventLogRef(eventLogRef)
+	Event<Args...>::Event(std::function<int(Args ...)> func,
+                          const std::string& name,EventLog& eventLogRef)
+		: _function(std::move(func)), _name(name), _returnValue(int()),
+          _eventLogRef(eventLogRef)
 	{
 		if (name.find(',') != std::string::npos)
 			throw std::invalid_argument{ "Event name cannot contain ','." };
