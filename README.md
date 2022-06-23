@@ -7,9 +7,9 @@ change depending on what happens in the story.
 -->
 
 A `Scene` object is text representation of the current game area that
-the player is in. Each `Scene` is comprised of multiple `Section` 
+the player is in. Each `Scene` is composed of multiple `Section` 
 objects, which may be active or inactive depending on the current game state.
-Each `Section` is comprised of multiple `Line` objects.
+Each `Section` is composed of multiple `Line` objects.
 
 During reading of `Lines`, the current game state can change 
 in the form of activating/deactivating `Sections`; 
@@ -34,12 +34,12 @@ scene or when `.stop()` is called.
 <!-- Description when you know what you want a scene to 
 be stored as.
 
-Each scene is stored in a seperate file and loaded individually.
+Each scene is stored in a separate file and loaded individually.
 Each scene file is stored as an array of script sections dictionaries, 
 mapping each section name as a key to an array of lines.
 -->
 
-<!-- Example json script when you've know what 
+<!-- Example json script when you've known what 
 you want your scene object to look like.
 ```
 
@@ -88,4 +88,4 @@ information on the conditions required to activate/deactivate it.
 
 ## Scenes
 `Scene` objects are containers for `Section` objects and contain
-methods required to modify each . 
+methods required to modify each. 

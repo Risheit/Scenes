@@ -1,6 +1,7 @@
 set(HEADER_FILES
     "${CMAKE_SOURCE_DIR}/include/Scenes/Event.hpp"
-    "${CMAKE_SOURCE_DIR}/include/Scenes/EventLog.h"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Log.hpp"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/EventLog.hpp"
     "pch.h"
 )
 

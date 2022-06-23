@@ -2,7 +2,7 @@
 #include <ranges>
 #include <gtest/gtest.h>
 
-#include "Scenes/Log.h"
+#include "Scenes/Log.hpp"
 
 using namespace Scenes;
 

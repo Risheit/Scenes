@@ -7,7 +7,7 @@
 #include <typeinfo>
 #include <utility>
 
-#include "EventLog.h"
+#include "EventLog.hpp"
 
 namespace Scenes
 {
