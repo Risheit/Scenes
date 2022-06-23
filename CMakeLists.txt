@@ -11,12 +11,12 @@ option(ENABLE_TESTING "Creates ctest tests" ON)
 
 ## Testing Tools
 if (ENABLE_TESTING)
-    # Include Google Test 
+    # Include Google Test
     include(FetchContent)
     FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest.git
+            GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929
     )
     # For Windows: Prevent overriding the parent project's compiler/linker settings
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -29,13 +29,13 @@ if (ENABLE_TESTING)
         add_executable(${TEST_NAME} ${TEST_FILE})
         target_link_libraries(${TEST_NAME} ${CMAKE_PROJECT_NAME} gtest_main)
         target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
-            "${CMAKE_SOURCE_DIR}/external/"
-            "${CMAKE_SOURCE_DIR}/include/"
-        )
+                "${CMAKE_SOURCE_DIR}/external/"
+                "${CMAKE_SOURCE_DIR}/include/"
+                )
         add_test(
-            NAME ${TEST_NAME}
-            COMMAND ${TEST_NAME}
-        )   
+                NAME ${TEST_NAME}
+                COMMAND ${TEST_NAME}
+        )
         gtest_discover_tests(${TEST_NAME})
     endfunction()
 endif()
@@ -45,7 +45,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-## Subdirectories 
+## Subdirectories
 add_subdirectory(src)
 
 if (ENABLE_TESTING)
