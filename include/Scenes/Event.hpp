@@ -81,4 +81,4 @@ namespace Scenes
 		_eventLogRef.addLog(eventString());
 		return _returnValue;
 	}
-}
+} // Scenes

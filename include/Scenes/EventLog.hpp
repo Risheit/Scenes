@@ -15,4 +15,4 @@ namespace Scenes
 			const LogNameType& eventName
 		) const override;
 	};
-}
+} // Scenes

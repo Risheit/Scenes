@@ -39,4 +39,4 @@ namespace Scenes
 		LogType _log;
 		const size_t& _linesRead;
 	};
-}
+} // Scenes
