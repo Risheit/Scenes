@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <ranges>
 #include <gtest/gtest.h>
 
 #include "Scenes/Log.hpp"
