@@ -34,6 +34,7 @@ namespace Scenes
 			const LogNameType& searchTerm
 		) const;
 
+        [[nodiscard]] bool empty() const noexcept;
 	protected:
 		// Map ordered with EventString -> [how many lines passed each call]
 		LogType _log;

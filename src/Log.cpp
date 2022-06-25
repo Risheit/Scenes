@@ -42,4 +42,9 @@ namespace Scenes
 
 		return results;
 	}
+
+    bool Log::empty() const noexcept
+    {
+        return _log.empty();
+    }
 } // Scenes
