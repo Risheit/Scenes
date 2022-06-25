@@ -5,7 +5,6 @@
 
 using namespace Scenes;
 
-// Demonstrate some basic assertions.
 class EventTests : public testing::Test
 {
 protected:
