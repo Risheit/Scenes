@@ -23,4 +23,9 @@ namespace Scenes
         if (_event.has_value())
             (*_event)(std::move(eventArg));
     }
+
+    const std::optional<Event<std::string> >& Line::event()
+    {
+        return _event;
+    }
 } // Scenes

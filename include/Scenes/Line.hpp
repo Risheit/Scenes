@@ -23,6 +23,7 @@ namespace Scenes
             std::string eventArgs = ""
         );
 
+        [[nodiscard]] const std::optional<Event<std::string> >& event();
     public:
         const std::string text;
 
