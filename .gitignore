@@ -3,10 +3,6 @@
 # Prerequisites
 *.d
 
-# Build folders
-[Bb]in/
-[Oo]bj/
-
 # Compiled Object files
 *.slo
 *.lo
@@ -120,9 +116,7 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.obj
 *.iobj
-*.pch
 *.pdb
 *.ipdb
 *.pgc
@@ -347,10 +341,6 @@ node_modules/
 *.dsw
 *.dsp
 
-# Visual Studio 6 technical files
-*.ncb
-*.aps
-
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
@@ -442,6 +432,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# JetBrains Clion
+.idea
 
 # Generated CMake Files
 CMakeLists.txt.user
