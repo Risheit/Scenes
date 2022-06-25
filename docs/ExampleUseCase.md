@@ -3,7 +3,7 @@ The following covers how Scenes may be used to run a
 text-based RPG. 
 Areas and locations are created through Scenes, and 
 current game states are decided through Sections reading
-the EventLog. Combat is handled by a seperate library,
+the EventLog. Combat is handled by a separate library,
 but the calling of combat and combat results are 
 handled through Scenes.
 
@@ -116,7 +116,7 @@ main()
 ```
 
 The reading is begun from the main function. To begin with,
-`reader` will check for the existance of a `Scenes` directory in `saveLoc`.
+`reader` will check for the existence of a `Scenes` directory in `saveLoc`.
 If a Scenes directory doesn't exist, `reader` will create it 
 and create and place `Globals.json` in it. 
 
@@ -172,7 +172,7 @@ which sections are read during the rest of the Scene.
 
 After `BeginningSection` is read, it is popped from the queue. 
 Before reading `SecretSection`, `reader` queries the event log for `"findSecret, 1"`. If
-an non-empty vector is returned, then `SecretSection` is read, otherwise
+a non-empty vector is returned, then `SecretSection` is read, otherwise
 it is popped from the queue. The reading of `RegulerSection` is similar,
 with `reader` querying `"findSecret, 0"`.
 
@@ -195,7 +195,7 @@ BattleRoom.scene:
 ```
 
 `TrapSection` is only read if the player has triggered a trap since
-entering the room. This is accomplished by `reader` initally querying `sceneLog` 
+entering the room. This is accomplished by `reader` initially querying `sceneLog` 
 for `BattleRoom` to get the final value in the result vector,
 finding at what line the player initially entered the room. `reader` then queries 
 `eventLog` for `triggeredTrap` to get the final value in the result
