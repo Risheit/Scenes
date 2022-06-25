@@ -1,4 +1,5 @@
 #include "Log.hpp"
+#include <ranges>
 
 #include "pch.h"
 
