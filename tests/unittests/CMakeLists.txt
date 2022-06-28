@@ -4,9 +4,10 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
         "EventTests.cpp"
-        "EventLogTests.cpp"
         "LogTests.cpp"
-        "Line.cpp"
+        "EventLogTests.cpp"
+        "LineTests.cpp"
+        "SectionTests.cpp"
         )
 
 set(ALL_FILES
@@ -23,3 +24,4 @@ create_gtest(EVENT_TEST EventTests.cpp)
 create_gtest(EVENT_LOG_TEST EventLogTests.cpp)
 create_gtest(LOG_TEST LogTests.cpp)
 create_gtest(LINES_TEST LineTests.cpp)
+create_gtest(SECTION_TEST SectionTests.cpp)

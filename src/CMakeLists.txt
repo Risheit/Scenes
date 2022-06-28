@@ -5,6 +5,7 @@ set(HEADER_FILES
         "${INCLUDE_DIR}/Log.hpp"
         "${INCLUDE_DIR}/EventLog.hpp"
         "${INCLUDE_DIR}/Line.hpp"
+        "${INCLUDE_DIR}/Section.hpp"
         "pch.h"
         )
 
@@ -13,6 +14,7 @@ set(SOURCE_FILES
         "EventLog.cpp"
         "pch.cpp"
         "Line.cpp"
+        "Section.cpp"
         )
 
 set(ALL_FILES
