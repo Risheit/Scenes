@@ -12,7 +12,6 @@ set(HEADER_FILES
 set(SOURCE_FILES
         "Log.cpp"
         "EventLog.cpp"
-        "pch.cpp"
         "Line.cpp"
         "Section.cpp"
         )
