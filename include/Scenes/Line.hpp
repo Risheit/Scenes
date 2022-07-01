@@ -11,7 +11,8 @@ namespace Scenes
     public:
         Line(
             std::string text,
-            Event <std::string> event
+            Event <std::string> event,
+            std::string eventArg
         );
 
         explicit Line(
@@ -19,8 +20,7 @@ namespace Scenes
         );
 
         void readLine(
-            std::ostream& stream,
-            std::string eventArgs = ""
+            std::ostream& stream
         );
 
         [[nodiscard]] const std::optional<Event<std::string> >& event();
@@ -29,5 +29,6 @@ namespace Scenes
 
     private:
         std::optional<Event<std::string> > _event;
+        std::string _eventArg;
     };
 } // Scenes

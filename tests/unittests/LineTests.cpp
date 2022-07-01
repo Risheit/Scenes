@@ -26,9 +26,9 @@ TEST_F(LineTests, ReadNoEventLine)
 TEST_F(LineTests, ReadEventLine)
 {
     Line line{ testString, Event<std::string>([](const std::string& s) { return stoi(s); },
-                                              "Test Event", log) };
+                                              "Test Event", log), "10" };
     std::stringstream ss;
-    line.readLine(ss, "10");
+    line.readLine(ss);
     EXPECT_EQ(testString, ss.str());
 
     const std::string eventString = line.event().value().eventString();
