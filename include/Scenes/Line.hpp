@@ -24,8 +24,11 @@ namespace Scenes
         );
 
         [[nodiscard]] const std::optional<Event<std::string> >& event();
-    public:
-        const std::string text;
+
+        [[nodiscard]] const std::string& text() const noexcept;
+
+    private:
+        const std::string _text;
 
     private:
         std::optional<Event<std::string> > _event;

@@ -9,17 +9,17 @@ namespace Scenes
 {
 
     Line::Line(std::string text, Event <std::string> event, std::string eventArg = "")
-        : text(std::move(text)), _event(std::make_optional<Event<std::string> >(std::move(event))),
+        : _text(std::move(text)), _event(std::make_optional<Event<std::string> >(std::move(event))),
           _eventArg(std::move(eventArg))
     {}
 
     Line::Line(std::string text)
-        : text(std::move(text))
+        : _text(std::move(text))
     {}
 
     void Line::readLine(std::ostream& stream)
     {
-        stream << text;
+        stream << _text;
         if (_event.has_value())
             (*_event)(std::move(_eventArg));
     }
@@ -28,4 +28,10 @@ namespace Scenes
     {
         return _event;
     }
+
+    const std::string& Line::text() const noexcept
+    {
+        return _text;
+    }
+
 } // Scenes
