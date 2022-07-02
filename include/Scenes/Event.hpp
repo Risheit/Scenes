@@ -1,6 +1,5 @@
 #pragma once
 #include <functional>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 // ReSharper disable once CppUnusedIncludeDirective
@@ -56,9 +55,7 @@ namespace Scenes
 	template<class ...Args>
 	std::string Event<Args...>::eventString() const
 	{
-		std::stringstream ss;
-		ss << _name << "," << _returnValue;
-		return ss.str();
+		return name() + "," + std::to_string(_returnValue);
 	}
 
 	template<class ...Args>
