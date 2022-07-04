@@ -16,7 +16,7 @@ protected:
 
 TEST_F(EventTests, TestCreateEventString)
 {
-    EXPECT_EQ(Event<int>::createEventString("test Event", 4), "test Event,4");
+    EXPECT_EQ(createEventString("test Event", 4), "test Event,4");
 }
 
 TEST_F(EventTests, CallsCorrectly)
