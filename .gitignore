@@ -452,3 +452,7 @@ _deps
 # Build folders
 [Oo]ut
 [Bb]uild
+
+# Doxygen Generated Folders
+html
+latex
