@@ -2,7 +2,6 @@
 #include <functional>
 #include <stdexcept>
 #include <string>
-// ReSharper disable once CppUnusedIncludeDirective
 #include <typeinfo>
 #include <utility>
 
