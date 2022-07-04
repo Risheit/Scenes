@@ -9,6 +9,11 @@
 
 namespace Scenes
 {
+    [[nodiscard]] static std::string createEventString(
+        const std::string& eventName,
+        int returnValue
+    );
+
 	template<class ...Args>
 	class Event
 	{
@@ -22,11 +27,6 @@ namespace Scenes
 		int operator()(
 			Args ... args
 		);
-
-        [[nodiscard]] static std::string createEventString(
-            const std::string& eventName,
-            int returnValue
-        );
 
 		[[nodiscard]] std::string eventString() const;
 
@@ -60,8 +60,7 @@ namespace Scenes
 			throw std::invalid_argument{ "Event name cannot contain ','." };
 	}
 
-    template<class ...Args>
-    std::string Event<Args...>::createEventString(const std::string& eventName, int returnValue)
+    std::string createEventString(const std::string& eventName, int returnValue)
     {
         return eventName + "," + std::to_string(returnValue);
     }
