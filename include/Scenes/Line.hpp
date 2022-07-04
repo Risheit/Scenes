@@ -27,6 +27,10 @@ namespace Scenes
 
         [[nodiscard]] const std::string& text() const noexcept;
 
+        bool operator==(const Line& rhs) const;
+
+        bool operator!=(const Line& rhs) const;
+
     private:
         const std::string _text;
 

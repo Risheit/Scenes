@@ -30,7 +30,11 @@ namespace Scenes
 
 		[[nodiscard]] const std::string& name() const;
 
-	protected:
+        bool operator==(const Event& rhs) const;
+
+        bool operator!=(const Event& rhs) const;
+
+    protected:
 		const std::function<int(Args ...)> _function;
 		const std::string _name;
 		int _returnValue;
@@ -77,4 +81,20 @@ namespace Scenes
 		_eventLogRef.addLog(eventString());
 		return _returnValue;
 	}
+
+    template<class... Args>
+    bool Event<Args...>::operator==(const Event& rhs) const
+    {
+        return std::tie(_function, _name, _returnValue) == std::tie(rhs._function, rhs._name, rhs._returnValue);
+    }
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "Simplify"
+    template<class... Args>
+    bool Event<Args...>::operator!=(const Event& rhs) const
+    {
+        return !(rhs == *this);
+    }
+#pragma clang diagnostic pop
+
 } // Scenes

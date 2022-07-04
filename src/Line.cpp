@@ -34,4 +34,14 @@ namespace Scenes
         return _text;
     }
 
+    bool Line::operator==(const Line& rhs) const
+    {
+        return std::tie(_text, _event, _eventArg) == std::tie(rhs._text, rhs._event, rhs._eventArg);
+    }
+
+    bool Line::operator!=(const Line& rhs) const
+    {
+        return !(rhs == *this);
+    }
+
 } // Scenes
