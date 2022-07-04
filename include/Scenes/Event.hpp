@@ -23,6 +23,11 @@ namespace Scenes
 			Args ... args
 		);
 
+        [[nodiscard]] static std::string createEventString(
+            const std::string& eventName,
+            int returnValue
+        );
+
 		[[nodiscard]] std::string eventString() const;
 
 		[[nodiscard]] const std::type_info& targetType() const;
@@ -54,6 +59,12 @@ namespace Scenes
 		if (name.find(',') != std::string::npos)
 			throw std::invalid_argument{ "Event name cannot contain ','." };
 	}
+
+    template<class ...Args>
+    std::string Event<Args...>::createEventString(const std::string& eventName, int returnValue)
+    {
+        return eventName + "," + std::to_string(returnValue);
+    }
 
 	template<class ...Args>
 	std::string Event<Args...>::eventString() const
