@@ -35,7 +35,9 @@ namespace Scenes
 
     bool Line::operator==(const Line& rhs) const
     {
-        return std::tie(_text, _event, _eventArg) == std::tie(rhs._text, rhs._event, rhs._eventArg);
+        return _text == rhs._text &&
+               _event == rhs._event &&
+               _eventArg == rhs._eventArg;
     }
 
     bool Line::operator!=(const Line& rhs) const

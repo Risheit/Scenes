@@ -84,7 +84,8 @@ namespace Scenes
     template<class... Args>
     bool Event<Args...>::operator==(const Event& rhs) const
     {
-        return std::tie(_function, _name, _returnValue) == std::tie(rhs._function, rhs._name, rhs._returnValue);
+        return _name == rhs._name &&
+               _returnValue == rhs._returnValue;
     }
 
 #pragma clang diagnostic push
