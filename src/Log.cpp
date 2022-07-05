@@ -14,10 +14,6 @@ namespace Scenes
 		_log[name].push_back(_linesRead);
 	}
 
-	/// <summary>
-	///		Query the call times of a stored log name.
-	/// </summary>
-	/// <returns>A Vector of call times if query succeeds, empty vector if fails.</returns>
 	LogResultType Log::query(const LogNameType& name) const
 	{
 		const auto it = _log.find(name);
@@ -27,11 +23,6 @@ namespace Scenes
 		return it->second;
 	}
 
-
-	/// <summary>
-	///		Find all keys containing a given search term.
-	/// </summary>
-	/// <returns>A vector of keys if search succeeds, empty vector if none found.</returns>
 	std::vector<LogNameType> Log::findKeys(const LogNameType& searchTerm) const
 	{
 		std::vector<LogNameType> results;
