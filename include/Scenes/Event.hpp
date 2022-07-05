@@ -59,6 +59,7 @@ namespace Scenes
 
         /**
          * @brief Run the stored functor and logs its result to eventLogRef.
+         *
          * @param args The arguments _function.
          * @return The return value of _function.
          */
@@ -68,18 +69,21 @@ namespace Scenes
 
         /**
          * @brief Determine the eventString of this Event.
+         *
          * @return A string taking the form "eventName,returnValue".
          */
 		[[nodiscard]] std::string eventString() const noexcept;
 
         /**
           * @brief Determine the type of the target of this Event.
+          *
           * @return The type identifier of the target function object, or typeid(void) if !(bool)*this.
          */
 		[[nodiscard]] const std::type_info& targetType() const noexcept;
 
         /**
          * @brief Get the name of this Event.
+         *
          * @return A string containing this Event's name.
          */
 		[[nodiscard]] const std::string& name() const noexcept;
