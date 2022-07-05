@@ -11,7 +11,7 @@ namespace Scenes
 
 	void Log::addLog(const LogNameType& name)
 	{
-		_log[name].push_back(static_cast<unsigned int>(_linesRead));
+		_log[name].push_back(_linesRead);
 	}
 
 	/// <summary>
