@@ -22,6 +22,7 @@ namespace Scenes
      * specific record, and find records that contain a substring. As adding to a Log isn't meant to be done manually,
      * no tools are provided to delete added records.
      *
+     * @warning Logs and log functions are case-sensitive.
      */
 	class Log
 	{
@@ -47,6 +48,8 @@ namespace Scenes
          * When adding to a Log, if a name already exists, the current line number is added to the end of the name's
          * result vector. If the name doesn't exist in the log, a new name is created and the current line number is
          * added to a new result vector.
+         *
+         *
          * @param name The name of the record to add or update.
          */
 		virtual void addLog(
