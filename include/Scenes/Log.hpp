@@ -33,7 +33,7 @@ namespace Scenes
 		virtual ~Log() = default;
 
         /**
-         * @brief Instantiates a new instance of the Log class.
+         * @brief Initializes a new instance of the Log class.
          *
          * @param linesRead A reference to the current line number in a game.
          */
