@@ -1,6 +1,6 @@
 /**
  * @file Event.hpp
- * @brief Contains the Event class and functions based on it.
+ * @brief Contains the Event class along with relevant types and functions.
  */
 
 #pragma once

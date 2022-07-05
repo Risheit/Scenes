@@ -1,6 +1,6 @@
 /**
  * @file EventLog.hpp
- * @brief Contains the EventLog class.
+ * @brief Contains the EventLog class along with relevant types and functions.
  */
 
 #pragma once
@@ -11,8 +11,7 @@ namespace Scenes
 {
     /**
      * @brief A Log class that stores records of Events that have been run.
-     *
-     * Event records names are of the form "Event name,return value" and are called eventStrings.
+     *     * Event records names are of the form "Event name,return value" and are called eventStrings.
      *
      * @copydetails Scenes::Log
      */
