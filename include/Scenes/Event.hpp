@@ -25,7 +25,7 @@ namespace Scenes
     [[nodiscard]] static std::string createEventString(
         const std::string& eventName,
         int returnValue
-    );
+    ) noexcept;
 
     /**
      * @brief Runs a stored function and logs its results to a given eventLog.
@@ -112,7 +112,7 @@ namespace Scenes
 			throw std::invalid_argument{ "Event name cannot contain ','." };
 	}
 
-    std::string createEventString(const std::string& eventName, int returnValue)
+    std::string createEventString(const std::string& eventName, int returnValue) noexcept
     {
         return eventName + "," + std::to_string(returnValue);
     }

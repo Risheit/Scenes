@@ -5,16 +5,16 @@
 
 namespace Scenes
 {
-	Log::Log(const size_t& linesRead)
+	Log::Log(const size_t& linesRead) noexcept
 		: _log(LogType()), _linesRead(linesRead)
 	{}
 
-	void Log::addLog(const LogNameType& name)
+	void Log::addLog(const LogNameType& name) noexcept
 	{
 		_log[name].push_back(_linesRead);
 	}
 
-	LogResultType Log::query(const LogNameType& name) const
+	LogResultType Log::query(const LogNameType& name) const noexcept
 	{
 		const auto it = _log.find(name);
 
@@ -23,7 +23,7 @@ namespace Scenes
 		return it->second;
 	}
 
-	std::vector<LogNameType> Log::findKeys(const LogNameType& searchTerm) const
+	std::vector<LogNameType> Log::findKeys(const LogNameType& searchTerm) const noexcept
 	{
 		std::vector<LogNameType> results;
 

@@ -40,7 +40,7 @@ namespace Scenes
          */
 		explicit Log(
 			const size_t& linesRead
-		);
+		) noexcept;
 
         /**
          * @brief Adds a new record or updates the result of an existing record in this Log.
@@ -54,7 +54,7 @@ namespace Scenes
          */
 		virtual void addLog(
 			const LogNameType& name
-		);
+		) noexcept;
 
         /**
          * @brief Queries this Log for the result vector of a provided record name.
@@ -65,7 +65,7 @@ namespace Scenes
          */
 		[[nodiscard]] virtual LogResultType query(
 			const LogNameType& name
-		) const;
+		) const noexcept;
 
         /**
          * @brief Finds what record names in this Log contain a given search term.
@@ -75,7 +75,7 @@ namespace Scenes
          */
 		[[nodiscard]] virtual std::vector<LogNameType> findKeys(
 			const LogNameType& searchTerm
-		) const;
+		) const noexcept;
 
         /**
          * @brief Checks if this Log is empty (it contains no records).
