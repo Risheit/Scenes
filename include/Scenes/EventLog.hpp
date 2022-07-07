@@ -25,7 +25,7 @@ namespace Scenes
          */
 		explicit EventLog(
 			const size_t& linesRead
-		);
+		) noexcept;
 
         /**
          * @brief Finds what eventStrings in this log contain a given Event name.
@@ -34,6 +34,6 @@ namespace Scenes
          */
 		[[nodiscard]] std::vector<LogNameType> findKeys(
 			const LogNameType& eventName
-		) const override;
+		) const noexcept override;
 	};
 } // Scenes

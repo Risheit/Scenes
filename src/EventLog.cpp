@@ -4,7 +4,7 @@
 
 namespace Scenes
 {
-	EventLog::EventLog(const size_t& linesRead)
+	EventLog::EventLog(const size_t& linesRead) noexcept
 		: Log(linesRead)
 	{}
 
@@ -12,7 +12,7 @@ namespace Scenes
 	///		A vector of eventStrings in the form "name, result" given the name.
 	///		If none are found, returns an empty vector.
 	/// </returns>
-	std::vector<LogNameType> EventLog::findKeys(const LogNameType& eventName) const
+	std::vector<LogNameType> EventLog::findKeys(const LogNameType& eventName) const noexcept
 	{
 		std::vector<LogNameType> results;
 
