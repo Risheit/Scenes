@@ -47,8 +47,10 @@ namespace Scenes
         /**
          * @brief Initializes a new instance of the Event class.
          *
+         * @warning Event names are case-sensitive.
+         *
          * @param func The stored functor.
-         * @param name The name of the event. Event names ARE case
+         * @param name The name of the event.
          * @param eventLogRef The eventLog that this instance will log to.
          */
 		Event(
