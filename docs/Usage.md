@@ -18,8 +18,8 @@ a flag that can affect the properties of `Scenes` or `Sections` or
 run a function call to a different library.
 
 ## Using Scenes
-Scenes is run through a `ScriptReader` object. The calling program
-instantiates the `ScriptReader`, providing it with the location
+Scenes is run through a `Reader` object. The calling program
+instantiates the `Reader`, providing it with the location
 of the directory containing the required scripts and 
 the directory to store modified scripts and other Scene information,
 along with the name of the script to load in initially.
@@ -46,7 +46,7 @@ you want your scene object to look like.
 ```
 -->
 ### Event
-An `Event` is an object that acts as a wrapper for a functor or as a message that is logged by the `ScriptReader`. 
+An `Event` is an object that acts as a wrapper for a functor or as a message that is logged by the `Reader`. 
 An `Event` can correspond to a `Line` object. When an `Event` is called,
 the time (represented by the number of `Lines` that have been read) 
 of the `Event`, along with the name of the `Event` object 
@@ -55,13 +55,13 @@ and a unique hash to allow for querying.
 > The hash is created using the Event's name and its functor.
 
 ### Script Reading
-Scripts are managed through a `ScriptReader` object.
-A `ScriptReader` logs how many lines have been read during the
+Scripts are managed through a `Reader` object.
+A `Reader` logs how many lines have been read during the
 playing of the game, all `Events` that are 
 called by a line object when it is read, and 
 handles querying events.
 
-A `ScriptReader` also stores a log of what `Scenes` have 
+A `Reader` also stores a log of what `Scenes` have 
 been displayed, along with what `Scene` is slotted to be 
 displayed next. A log of an `Event` includes its name and how many lines 
 into the game it was called.
@@ -71,7 +71,7 @@ every `Section` in a `Scene` is queued in the order that it
 is written in the script, but individual `Lines` can modify
 that queue by inserting or removing sections, or moving to another 
 `Scene`. Lines in a `Section` are read in the same order that
-they are written to a script. During the reading of a `Section`, it can query the `ScriptReader`
+they are written to a script. During the reading of a `Section`, it can query the `Reader`
 to determine how it should act based on the current logged `Events`. 
 
 ## Lines

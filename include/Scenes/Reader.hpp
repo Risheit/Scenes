@@ -2,7 +2,7 @@
 namespace Scenes
 {
 
-    class ScriptReader
+    class Reader
     {
 
     };

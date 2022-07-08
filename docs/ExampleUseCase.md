@@ -43,29 +43,30 @@ main()
     Player player{...};
     Monster monster{...};
 	... 
-    Scenes::EventMap emap = {
-      {"initializeVar", Scenes::Event([player, monster](string s) -> int {
+    EventMap emap = {
+      {"initializeVar", Event([player, monster](string s) -> int {
             player.hp = 10;
             ...
             return 0; 
       }},
-      {"dealDamage", Scenes::makeEvent(player.dealDamage, ...)},
-      {"dealDamage", Scenes::makeEvent(monster.chooseMonster, ...)};
+      {"dealDamage", Reader::makeEvent(player.dealDamage, ...)},
+      {"dealDamage", Reader:makeEvent(monster.chooseMonster, ...)};
       ...
     };
 	... 
 } 
 ```
 
-While ScriptReader comes with a standard set of Events that it can always run, creating custom events requires the ScriptReader to be given a custom Event Map, a map from string Event names to the events that they call. 
-These Events can be initialized through an Event constructor or through the `Scenes::makeEvent` function.
+The object that reads through and manages Scenes scripts is called a `Reader`.
+While Reader comes with a standard set of Events that it can always run, creating custom events requires the Reader to be given a custom Event Map, a map from string Event names to the events that they call. 
+These Events can be initialized through an Event constructor or through the `Reader::makeEvent` function.
 
 ## Initializing Scenes
 ```
 main() 
 { 
 ... 
-	ScriptReader<ExternalVars> reader = ScriptReader<ExternalVars>( 
+	Reader<ExternalVars> reader = Reader<ExternalVars>( 
 		"\PathtoBaseSceneFiles\", 
 		"\PathtoSaveData\", 
 		emap
@@ -74,7 +75,7 @@ main()
 } 
 ```
 
-A new ScriptReader object, `reader`, is created and provided with required file data to construct properly, along with the `emap` map to access custom Events. 
+A new Reader object, `reader`, is created and provided with required file data to construct properly, along with the `emap` map to access custom Events. 
 `reader` instantiates the following variables:
 
 ```
