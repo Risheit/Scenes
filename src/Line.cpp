@@ -23,7 +23,7 @@ namespace Scenes
             (*_event)(std::move(_eventArg));
     }
 
-    const std::optional<Event<std::string> >& Line::event()
+    const std::optional<Event<std::string> >& Line::event() const noexcept
     {
         return _event;
     }
