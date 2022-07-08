@@ -35,23 +35,22 @@ namespace Scenes
                 }}
           }),
           _binaryPredicateMap({
-                {"triggeredSinceLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredSinceLatestScene(sceneName, eventString);
+                {"triggeredSinceLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return triggeredSinceLatestSceneCall(sceneName, eventString);
                 }},
-                {"notTriggeredSinceLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredSinceLatestScene(sceneName, eventString);
+                {"notTriggeredSinceLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return notTriggeredSinceLatestSceneCall(sceneName, eventString);
                 }},
-                {"triggeredBeforeLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredBeforeLatestScene(sceneName, eventString);
+                {"triggeredBeforeLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return triggeredBeforeLatestSceneCall(sceneName, eventString);
                 }},
-                {"notTriggeredBeforeLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredBeforeLatestScene(sceneName, eventString);
+                {"notTriggeredBeforeLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return notTriggeredBeforeLatestSceneCall(sceneName, eventString);
                 }},
 
           })
     {}
 
-    // Doesn't check if a section is active.
     void Section::readLine(std::ostream& stream) noexcept
     {
         _lines.front().readLine(stream);
@@ -63,7 +62,6 @@ namespace Scenes
         return _lines.empty();
     }
 
-    // Returns true if a condition is unary and its referenced predicate is true and false otherwise.
     Section::CheckResult Section::checkUnaryCondition(const Condition& condition) const noexcept
     {
 
@@ -79,7 +77,6 @@ namespace Scenes
         return CheckResult::True;
     }
 
-    // Returns true if a condition is binary and its reference predicate is true and false otherwise.
     Section::CheckResult Section::checkBinaryCondition(const Condition& condition) const noexcept
     {
 
@@ -187,7 +184,7 @@ namespace Scenes
         return _eventLogRef.query(eventString).empty();
     }
 
-    bool Section::triggeredSinceLatestScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::triggeredSinceLatestSceneCall(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -196,7 +193,7 @@ namespace Scenes
         return eventCalls.back() >= sceneCalls.back();
     }
 
-    bool Section::notTriggeredSinceLatestScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::notTriggeredSinceLatestSceneCall(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -205,7 +202,7 @@ namespace Scenes
         return eventCalls.back() < sceneCalls.back();
     }
 
-    bool Section::triggeredBeforeLatestScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::triggeredBeforeLatestSceneCall(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -217,7 +214,7 @@ namespace Scenes
         return eventCalls.back() < sceneCalls.back();
     }
 
-    bool Section::notTriggeredBeforeLatestScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::notTriggeredBeforeLatestSceneCall(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
