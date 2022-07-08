@@ -22,7 +22,7 @@ class Player {
 	int money; 
 	... 
 
-	static Player player; 
+    void dealDamage(...);
 } 
 
 class Monster { 
@@ -31,33 +31,34 @@ class Monster {
 
 ```
 
-The CombatManager and Player singletons are created, dealing with the external game states that Scenes will not control.
-These singletons provide various global functions accessed in scenes through `cm.func()` or `player.func()`.
+The CombatManager singleton is created, dealing with the external game states and objects that Scenes doesn't control.
 
-The class Monster provides information about monsters that the 
-player will fight in the battle room.
+The class Player provides information on the game's player, while the class Monster provides information about monsters that the player will fight in the battle room.
 
 ```
-struct ExternalVars { 
-	Monster const& monster, 
-	... 
-} 
+void initializeVarFunc(...);
 
 main() 
 { 
+    Player player{...};
+    Monster monster{...};
 	... 
-	Monster nextMonster = Monster(); 
-	ExternalVars ext = ExternalVars( 
-		nextMonster, 
-		... 
-	); 
+    Scenes::EventMap emap = {
+      {"initializeVar", Scenes::Event([player, monster](string s) -> int {
+            player.hp = 10;
+            ...
+            return 0; 
+      }},
+      {"dealDamage", Scenes::makeEvent(player.dealDamage, ...)},
+      {"dealDamage", Scenes::makeEvent(monster.chooseMonster, ...)};
+      ...
+    };
 	... 
 } 
 ```
 
-For a ScriptReader to be able to access external variables or objects that aren't global or singletons, it must be provided references to those variables through a structure passed to the object during compilation. 
-The ExternalVars struct `ext` serves this purpose in this example, created containing references to the `nextMonster` local variable. 
-
+While ScriptReader comes with a standard set of Events that it can always run, creating custom events requires the ScriptReader to be given a custom Event Map, a map from string Event names to the events that they call. 
+These Events can be initialized through an Event constructor or through the `Scenes::makeEvent` function.
 
 ## Initializing Scenes
 ```
@@ -67,13 +68,13 @@ main()
 	ScriptReader<ExternalVars> reader = ScriptReader<ExternalVars>( 
 		"\PathtoBaseSceneFiles\", 
 		"\PathtoSaveData\", 
-		ext 
+		emap
 	); 
 ... 
 } 
 ```
 
-A new ScriptReader object, `reader`, is created and provided with required file data to construct properly, along with the `ext` struct to access variables from outside its scope. 
+A new ScriptReader object, `reader`, is created and provided with required file data to construct properly, along with the `emap` map to access custom Events. 
 `reader` instantiates the following variables:
 
 ```
@@ -101,8 +102,7 @@ main()
 
 The reading is begun from the main function. To begin with,
 `reader` will check for the existence of a `Scenes` directory in `saveLoc`.
-If a Scenes directory doesn't exist, `reader` will create it 
-and create and place `Globals.json` in it. 
+If a Scenes directory doesn't exist, `reader` will create it and create and place `Globals.json` in it. 
 
 ```
 SectionList curScene = findEntrance(); 
@@ -145,14 +145,14 @@ SecretSection,
 RegularSection
 ```
 
-the event `initializeVar` is run first. This event is connected to a function that initializes `cm`, `player`, and other external variables passed through `ext`.
-During the end of the `BeginningSection` the event `findSecret` is run. 
-The results of this event affect which sections are read during the rest of the Scene. 
+the Event `initializeVar` is run first. This Event calls a lambda function to initialize various class variables at the start of the game.
+During the end of the `BeginningSection` the Event `findSecret` is run.
+The results of this Event affect which sections are read during the rest of the Scene. 
 
 After `BeginningSection` is read, it is popped from the queue. 
-Before reading `SecretSection`, `reader` queries the event log for `"findSecret, 1"`. If a non-empty vector is returned, then `SecretSection` is read, otherwise it is popped from the queue. The reading of `RegulerSection` is similar, with `reader` querying `"findSecret, 0"`.
+Before reading `SecretSection`, `reader` queries the Event log for `"findSecret, 1"`. If a non-empty vector is returned, then `SecretSection` is read, otherwise it is popped from the queue. The reading of `RegulerSection` is similar, with `reader` querying `"findSecret, 0"`.
 
-The event `setNextScene` loads the given Scene, and is required at some point in the Scene to prevent the reading from ending.
+The Event `setNextScene` loads the given Scene, and is required at some point in the Scene to prevent the reading from ending.
 
 
 ## Running the Battle Room
@@ -173,9 +173,7 @@ BattleRoom.scene:
 `reader` then queries `eventLog` for `triggeredTrap` to get the final value in the result vector. 
 If the line that the player triggered the trap is greater than or equal to the line the player initially entered the room, the player is considered to have triggered a trap upon entering the room.
 
-`dealDamage` accesses the `player.dealRandomDamage()`method without sharing it with `reader` as a struct, as `player` is a globally accessible singleton.
-`chooseMonster` accesses the `ext.monster.chooseMonster()` method.
-As `monster` isn't globally accessible, `reader` must first access the `ext` struct to get a reference to the method.
+`dealDamage` and `chooseMonster` access the `player.dealRandomDamage()` method and the `monster.chooseMonster` method respectively through the event map `emap`.
 
 ```
 BattleRoom.scene:
