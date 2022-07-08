@@ -234,13 +234,13 @@ TEST_F(SectionTests, TestSectionWithGreaterThanOrEqualCondition)
 TEST_F(SectionTests, TestSectionWithTriggeredSinceSceneCondition)
 {
     Section success = createTestSection(
-        { Section::Condition("triggeredSinceScene", { "Example Scene", createEventString("Example Event", 5) }) }
+        { Section::Condition("triggeredSinceLatestSceneCall", { "Example Scene", createEventString("Example Event", 5) }) }
     );
 
     EXPECT_EQ(sectionReadResult(success), lineQueue);
 
     Section failure = createTestSection(
-        { Section::Condition("triggeredSinceScene", { "Example Scene", createEventString("Example Event", 2) }) }
+        { Section::Condition("triggeredSinceLatestSceneCall", { "Example Scene", createEventString("Example Event", 2) }) }
     );
 
     EXPECT_EQ(sectionReadResult(failure), std::deque<Line>());
@@ -249,7 +249,7 @@ TEST_F(SectionTests, TestSectionWithTriggeredSinceSceneCondition)
         std::queue<Line>(lineQueue),
         sceneLog,
         eventLog,
-        { Section::Condition("triggeredSinceScene", { createEventString("Example Event", 2) }) }
+        { Section::Condition("triggeredSinceLatestSceneCall", { createEventString("Example Event", 2) }) }
     };
 
     EXPECT_THROW(sectionReadResult(invalid_size), std::invalid_argument);
@@ -258,13 +258,13 @@ TEST_F(SectionTests, TestSectionWithTriggeredSinceSceneCondition)
 TEST_F(SectionTests, TestSectionWithNotTriggeredSinceSceneCondition)
 {
     Section success = createTestSection(
-        { Section::Condition("notTriggeredSinceScene", { "Example Scene 2", createEventString("Example Event", 2) }) }
+        { Section::Condition("notTriggeredSinceLatestSceneCall", { "Example Scene 2", createEventString("Example Event", 2) }) }
     );
 
     EXPECT_EQ(sectionReadResult(success), lineQueue);
 
     Section failure = createTestSection(
-        { Section::Condition("notTriggeredSinceScene", { "Example Scene 2", createEventString("Example Event", 5) }) }
+        { Section::Condition("notTriggeredSinceLatestSceneCall", { "Example Scene 2", createEventString("Example Event", 5) }) }
     );
 
     EXPECT_EQ(sectionReadResult(failure), std::deque<Line>());
@@ -273,7 +273,7 @@ TEST_F(SectionTests, TestSectionWithNotTriggeredSinceSceneCondition)
         std::queue<Line>(lineQueue),
         sceneLog,
         eventLog,
-        { Section::Condition("notTriggeredSinceScene", { createEventString("Example Event", 2) }) }
+        { Section::Condition("notTriggeredSinceLatestSceneCall", { createEventString("Example Event", 2) }) }
     };
 
     EXPECT_THROW(sectionReadResult(invalid_size), std::invalid_argument);
@@ -282,13 +282,13 @@ TEST_F(SectionTests, TestSectionWithNotTriggeredSinceSceneCondition)
 TEST_F(SectionTests, TestSectionWithTriggeredBeforeSceneCondition)
 {
     Section success = createTestSection(
-        { Section::Condition("triggeredBeforeScene", { "Unreached Scene", createEventString("Example Event", 2) }) }
+        { Section::Condition("triggeredBeforeLatestSceneCall", { "Unreached Scene", createEventString("Example Event", 2) }) }
     );
 
     EXPECT_EQ(sectionReadResult(success), lineQueue);
 
     Section failure = createTestSection(
-        { Section::Condition("triggeredBeforeScene", { "Example Scene", createEventString("Uncalled Event", 1) }) }
+        { Section::Condition("triggeredBeforeLatestSceneCall", { "Example Scene", createEventString("Uncalled Event", 1) }) }
     );
 
     EXPECT_EQ(sectionReadResult(failure), std::deque<Line>());
@@ -297,7 +297,7 @@ TEST_F(SectionTests, TestSectionWithTriggeredBeforeSceneCondition)
         std::queue<Line>(lineQueue),
         sceneLog,
         eventLog,
-        { Section::Condition("triggeredBeforeScene", { createEventString("Example Event", 2) }) }
+        { Section::Condition("triggeredBeforeLatestSceneCall", { createEventString("Example Event", 2) }) }
     };
 
     EXPECT_THROW(sectionReadResult(invalid_size), std::invalid_argument);
@@ -306,13 +306,13 @@ TEST_F(SectionTests, TestSectionWithTriggeredBeforeSceneCondition)
 TEST_F(SectionTests, TestSectionWithNotTriggeredBeforeSceneCondition)
 {
     Section success = createTestSection(
-        { Section::Condition("notTriggeredBeforeScene", { "Example Scene", createEventString("Uncalled Event", 1) }) }
+        { Section::Condition("notTriggeredBeforeLatestSceneCall", { "Example Scene", createEventString("Uncalled Event", 1) }) }
     );
 
     EXPECT_EQ(sectionReadResult(success), lineQueue);
 
     Section failure = createTestSection(
-        { Section::Condition("notTriggeredBeforeScene", { "Uncalled Scene", createEventString("Example Event", 2) }) }
+        { Section::Condition("notTriggeredBeforeLatestSceneCall", { "Uncalled Scene", createEventString("Example Event", 2) }) }
     );
 
     EXPECT_EQ(sectionReadResult(failure), std::deque<Line>());
@@ -321,7 +321,7 @@ TEST_F(SectionTests, TestSectionWithNotTriggeredBeforeSceneCondition)
         std::queue<Line>(lineQueue),
         sceneLog,
         eventLog,
-        { Section::Condition("notTriggeredBeforeScene", { createEventString("Example Event", 2) }) }
+        { Section::Condition("notTriggeredBeforeLatestSceneCall", { createEventString("Example Event", 2) }) }
     };
 
     EXPECT_THROW(sectionReadResult(invalid_size), std::invalid_argument);
@@ -331,7 +331,7 @@ TEST_F(SectionTests, TestSectionWithMultipleConditions)
 {
     Section section = createTestSection(
         {
-            Section::Condition("notTriggeredBeforeScene", { "Example Scene", createEventString("Uncalled Event", 1) }),
+            Section::Condition("notTriggeredBeforeLatestSceneCall", { "Example Scene", createEventString("Uncalled Event", 1) }),
             Section::Condition("expectHigherOrEqual", { createEventString("Example Event", 5) })
         }
     );
