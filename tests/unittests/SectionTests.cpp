@@ -326,3 +326,15 @@ TEST_F(SectionTests, TestSectionWithNotTriggeredBeforeSceneCondition)
 
     EXPECT_THROW(sectionReadResult(invalid_size), std::invalid_argument);
 }
+
+TEST_F(SectionTests, TestSectionWithMultipleConditions)
+{
+    Section section = createTestSection(
+        {
+            Section::Condition("notTriggeredBeforeScene", { "Example Scene", createEventString("Uncalled Event", 1) }),
+            Section::Condition("expectHigherOrEqual", { createEventString("Example Event", 5) })
+        }
+    );
+
+    EXPECT_EQ(sectionReadResult(section), lineQueue);
+}
