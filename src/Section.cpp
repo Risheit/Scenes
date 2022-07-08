@@ -35,17 +35,17 @@ namespace Scenes
                 }}
           }),
           _binaryPredicateMap({
-                {"triggeredSinceScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredSinceScene(sceneName, eventString);
+                {"triggeredSinceLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return triggeredSinceLatestScene(sceneName, eventString);
                 }},
-                {"notTriggeredSinceScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredSinceScene(sceneName, eventString);
+                {"notTriggeredSinceLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return notTriggeredSinceLatestScene(sceneName, eventString);
                 }},
-                {"triggeredBeforeScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredBeforeScene(sceneName, eventString);
+                {"triggeredBeforeLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return triggeredBeforeLatestScene(sceneName, eventString);
                 }},
-                {"notTriggeredBeforeScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredBeforeScene(sceneName, eventString);
+                {"notTriggeredBeforeLatestScene", [this](const std::string& sceneName, const std::string& eventString) -> bool {
+                    return notTriggeredBeforeLatestScene(sceneName, eventString);
                 }},
 
           })
@@ -135,7 +135,7 @@ namespace Scenes
 
     bool Section::expectEqual(const std::string& eventString)
     {
-        return !_eventLogRef.query(eventString).empty();
+        return !expectNotEqual(eventString);
     }
 
     bool Section::expectLower(const std::string& eventString)
@@ -187,7 +187,7 @@ namespace Scenes
         return _eventLogRef.query(eventString).empty();
     }
 
-    bool Section::triggeredSinceScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::triggeredSinceLatestScene(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -196,7 +196,7 @@ namespace Scenes
         return eventCalls.back() >= sceneCalls.back();
     }
 
-    bool Section::notTriggeredSinceScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::notTriggeredSinceLatestScene(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -205,7 +205,7 @@ namespace Scenes
         return eventCalls.back() < sceneCalls.back();
     }
 
-    bool Section::triggeredBeforeScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::triggeredBeforeLatestScene(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
@@ -217,7 +217,7 @@ namespace Scenes
         return eventCalls.back() < sceneCalls.back();
     }
 
-    bool Section::notTriggeredBeforeScene(const std::string& sceneName, const std::string& eventString)
+    bool Section::notTriggeredBeforeLatestScene(const std::string& sceneName, const std::string& eventString)
     {
         auto sceneCalls = _sceneLogRef.query(sceneName);
         auto eventCalls =  _eventLogRef.query(eventString);
