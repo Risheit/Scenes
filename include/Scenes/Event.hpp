@@ -51,7 +51,7 @@ namespace Scenes
          *
          * @param func The stored functor.
          * @param name The name of the event.
-         * @param eventLogRef The eventLog that this instance will log to.
+         * @param eventLogRef A reference to the eventLog that this instance will log to.
          */
 		Event(
 			std::function<int(Args ...)> func,
