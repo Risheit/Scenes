@@ -11,8 +11,7 @@
 namespace Scenes
 {
     Section::Condition::Condition(std::string name, std::vector<std::string> arguments)
-        : name(std::move(name)), arguments(std::move(arguments))
-    {}
+        : name(std::move(name)), arguments(std::move(arguments)) {}
 
     Section::Section(
         std::queue<Line> lines, const Log& sceneLogRef, const EventLog& eventLogRef,
@@ -21,35 +20,50 @@ namespace Scenes
         : _lines(std::move(lines)), _isChecked(false), _sceneLogRef(sceneLogRef), _eventLogRef(eventLogRef),
           _conditions(std::move(conditions)), _state(false),
           _unaryPredicateMap({
-                {"expectEqual", [this](const std::string& eventString) -> bool { return expectEqual(eventString); }},
-                {"expectLower", [this](const std::string& eventString) -> bool { return expectLower(eventString); }},
-                {"expectLowerOrEqual", [this](const std::string& eventString) -> bool {
-                    return expectLowerOrEqual(eventString);
-                }},
-                {"expectHigher", [this](const std::string& eventString) -> bool { return expectHigher(eventString); }},
-                {"expectHigherOrEqual", [this](const std::string& eventString) -> bool {
-                    return expectHigherOrEqual(eventString);
-                }},
-                {"expectNotEqual", [this](const std::string& eventString) -> bool {
-                    return expectNotEqual(eventString);
-                }}
-          }),
+                                 { "expectEqual",
+                                   [this](const std::string& eventString) -> bool { return expectEqual(eventString); }},
+                                 { "expectLower",
+                                   [this](const std::string& eventString) -> bool { return expectLower(eventString); }},
+                                 { "expectLowerOrEqual", [this](const std::string& eventString) -> bool
+                                 {
+                                     return expectLowerOrEqual(eventString);
+                                 }},
+                                 { "expectHigher", [this](const std::string& eventString) -> bool
+                                 {
+                                     return expectHigher(eventString);
+                                 }},
+                                 { "expectHigherOrEqual", [this](const std::string& eventString) -> bool
+                                 {
+                                     return expectHigherOrEqual(eventString);
+                                 }},
+                                 { "expectNotEqual", [this](const std::string& eventString) -> bool
+                                 {
+                                     return expectNotEqual(eventString);
+                                 }}
+                             }),
           _binaryPredicateMap({
-                {"triggeredSinceLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredSinceLatestSceneCall(sceneName, eventString);
-                }},
-                {"notTriggeredSinceLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredSinceLatestSceneCall(sceneName, eventString);
-                }},
-                {"triggeredBeforeLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return triggeredBeforeLatestSceneCall(sceneName, eventString);
-                }},
-                {"notTriggeredBeforeLatestSceneCall", [this](const std::string& sceneName, const std::string& eventString) -> bool {
-                    return notTriggeredBeforeLatestSceneCall(sceneName, eventString);
-                }},
+                                  { "triggeredSinceLatestSceneCall",
+                                    [this](const std::string& sceneName, const std::string& eventString) -> bool
+                                    {
+                                        return triggeredSinceLatestSceneCall(sceneName, eventString);
+                                    }},
+                                  { "notTriggeredSinceLatestSceneCall",
+                                    [this](const std::string& sceneName, const std::string& eventString) -> bool
+                                    {
+                                        return notTriggeredSinceLatestSceneCall(sceneName, eventString);
+                                    }},
+                                  { "triggeredBeforeLatestSceneCall",
+                                    [this](const std::string& sceneName, const std::string& eventString) -> bool
+                                    {
+                                        return triggeredBeforeLatestSceneCall(sceneName, eventString);
+                                    }},
+                                  { "notTriggeredBeforeLatestSceneCall",
+                                    [this](const std::string& sceneName, const std::string& eventString) -> bool
+                                    {
+                                        return notTriggeredBeforeLatestSceneCall(sceneName, eventString);
+                                    }},
 
-          })
-    {}
+                              }) {}
 
     void Section::readLine(std::ostream& stream) noexcept
     {
@@ -84,7 +98,7 @@ namespace Scenes
         if (refBinaryPredicate == _binaryPredicateMap.end())
             return CheckResult::InvalidCondition;
 
-        if (condition.arguments.size() != 2 )
+        if (condition.arguments.size() != 2)
             return CheckResult::InvalidSize;
 
         if (!refBinaryPredicate->second(condition.arguments[0], condition.arguments[1]))
@@ -122,16 +136,18 @@ namespace Scenes
 
 #pragma region Condition functions
 
-    [[nodiscard]] std::string getEventName(const std::string& eventString)
+    namespace
     {
-        return eventString.substr(0, eventString.find(','));
-    }
+        [[nodiscard]] std::string getEventName(const std::string& eventString)
+        {
+            return eventString.substr(0, eventString.find(','));
+        }
 
-    [[nodiscard]] int getEventReturn(const std::string& eventString)
-    {
-        return std::stoi(eventString.substr(eventString.find(',') + 1));
+        [[nodiscard]] int getEventReturn(const std::string& eventString)
+        {
+            return std::stoi(eventString.substr(eventString.find(',') + 1));
+        }
     }
-
     bool Section::expectEqual(const std::string& eventString)
     {
         return !expectNotEqual(eventString);
