@@ -19,7 +19,7 @@ namespace Scenes
         ConditionVector conditions
     )
         : _lines(std::move(lines)), _isChecked(false), _sceneLogRef(sceneLogRef), _eventLogRef(eventLogRef),
-          _conditions(std::move(conditions)),
+          _conditions(std::move(conditions)), _state(false),
           _unaryPredicateMap({
                 {"expectEqual", [this](const std::string& eventString) -> bool { return expectEqual(eventString); }},
                 {"expectLower", [this](const std::string& eventString) -> bool { return expectLower(eventString); }},
@@ -119,6 +119,8 @@ namespace Scenes
 
         return _state;
     }
+
+#pragma region Condition functions
 
     [[nodiscard]] std::string getEventName(const std::string& eventString)
     {
@@ -225,4 +227,6 @@ namespace Scenes
 
         return eventCalls.back() >= sceneCalls.back();
     }
+
+#pragma endregion
 } // Scenes

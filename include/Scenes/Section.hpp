@@ -73,6 +73,7 @@ namespace Scenes
             InvalidCondition //!< @internal Condition isn't found in a Condition map.
         };
 
+#pragma region Conditions
         [[nodiscard]] CheckResult checkUnaryCondition(
             const Condition& condition
         ) const noexcept;
@@ -194,7 +195,7 @@ namespace Scenes
             const std::string& sceneName,
             const std::string& eventString
         );
-
+#pragma endregion
 
     public:
         /**
