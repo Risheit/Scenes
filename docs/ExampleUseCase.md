@@ -18,22 +18,24 @@ class CombatManager {
 } 
 
 class Player { 
-	int hp; 
-	int money; 
-	... 
-
-    void dealDamage(...);
+        int hp; 
+        int money; 
+        ... 
+        int dealDamage(...);
+        ...
 } 
 
 class Monster { 
 	... 
+	static Monster chooseMonster();
+	...
 } 
 
 ```
 
 The CombatManager singleton is created, dealing with the external game states and objects that Scenes doesn't control.
 
-The class Player provides information on the game's player, while the class Monster provides information about monsters that the player will fight in the battle room.
+The class Player provides information on the game's player, while the class Monster provides information about monsters that the player will fight in the battle room. Creating events in 
 
 ```
 void initializeVarFunc(...);
@@ -43,43 +45,36 @@ main()
     Player player{...};
     Monster monster{...};
 	... 
-    EventMap emap = {
-      {"initializeVar", Event([player, monster](string s) -> int {
-            player.hp = 10;
-            ...
-            return 0; 
-      }},
-      {"dealDamage", Reader::makeEvent(player.dealDamage, ...)},
-      {"dealDamage", Reader:makeEvent(monster.chooseMonster, ...)};
-      ...
-    };
-	... 
 } 
 ```
 
-The object that reads through and manages Scenes scripts is called a `Reader`.
-While Reader comes with a standard set of Events that it can always run, creating custom events requires the Reader to be given a custom Event Map, a map from string Event names to the events that they call. 
-These Events can be initialized through an Event constructor or through the `Reader::makeEvent` function.
+`initializeVarFunc()` is a function that initializes variables and classes to set up the game properly. `player` and `monster` are instances of their respective classes used by the game.
 
 ## Initializing Scenes
 ```
 main() 
 { 
-... 
-	Reader<ExternalVars> reader = Reader<ExternalVars>( 
+    ... 
+	Reader reader = Reader( 
 		"\PathtoBaseSceneFiles\", 
 		"\PathtoSaveData\", 
-		emap
 	); 
-... 
+	
+	reader.addEvent<void>("initializeVar", [player, monster](string s) {
+            player.hp = 10;
+      });
+    reader.addEvent("dealDamage", player.dealDamage);
+    reader.addEvent<Monster>("dealDamage", monster.chooseMonster);
+    ... 
 } 
 ```
-
-A new Reader object, `reader`, is created and provided with required file data to construct properly, along with the `emap` map to access custom Events. 
+The object that reads through and manages Scenes scripts is called a `Reader`.
+A new Reader object, `reader`, is created and provided with required file data to construct properly.
+Multiple calls to `reader.addEvent()` are used to add custom events to `reader`, mapping events to the functions or lambdas that they will call. 
 `reader` instantiates the following variables:
 
 ```
-sizet  linesRead = 0;
+size_t  linesRead = 0;
 EventLog eventLog = EventLog(linesRead); 
 Log sceneLog = Log(linesRead);
 string sceneLoc = "\PathtoBaseSceneFiles\"; 
