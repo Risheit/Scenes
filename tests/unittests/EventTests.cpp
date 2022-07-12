@@ -53,3 +53,20 @@ TEST_F(EventTests, CallsLoggedCorrectly)
 	linesRead++;
 	noreturnCallExpected.push_back(linesRead);
 }
+
+TEST_F(EventTests, ValueEventCanTakeReference)
+{
+    auto func = [](const std::string&) -> int { return 0; };
+    std::vector<size_t> expected;
+
+    Event<std::string> e_1{func, "Test", log};
+    e_1("");
+    expected.push_back(linesRead);
+    EXPECT_EQ(log.query(createEventString("Test", 0)), expected);
+
+}
+
+TEST_F(EventTests, IsMoveConstructible)
+{
+	EXPECT_TRUE(std::is_move_constructible<Event<std::string> >::value);
+}

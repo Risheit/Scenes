@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <ranges>
+#include <type_traits>
 #include <gtest/gtest.h>
 
 #include "Scenes/EventLog.hpp"
@@ -61,4 +62,9 @@ TEST_F(EventLogTests, FindEventCorrectly)
 
 	EXPECT_EQ(expected, actual);
 	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistent"));
+}
+
+TEST_F(EventLogTests, IsMoveConstructible)
+{
+    EXPECT_TRUE(std::is_move_constructible<EventLog>::value);
 }
