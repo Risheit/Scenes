@@ -62,3 +62,8 @@ TEST_F(LogTests, FindLogCorrectly)
 	EXPECT_EQ(expected, actual);
 	EXPECT_EQ(std::vector<Scenes::LogNameType>{}, log.findKeys("NonExistent"));
 }
+
+TEST_F(LogTests, IsMoveConstructible)
+{
+	EXPECT_TRUE(std::is_move_constructible<Log>::value);
+}
