@@ -8,15 +8,24 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 ## Options
 option(ENABLE_TESTING "Creates ctest tests" ON)
 
+## External Libraries
+include(FetchContent)
 
-## Testing Tools
+# JSON
+FetchContent_Declare(
+        json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG v3.10.5
+)
+FetchContent_MakeAvailable(json)
+
+# Testing Tools
 if (ENABLE_TESTING)
     # Include Google Test
-    include(FetchContent)
     FetchContent_Declare(
             googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
-            GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929
+            GIT_TAG release-1.12.1
     )
     # For Windows: Prevent overriding the parent project's compiler/linker settings
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
