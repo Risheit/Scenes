@@ -7,8 +7,8 @@
 namespace Scenes
 {
 
-    Line::Line(std::string text, Event <std::string> event, std::string eventArg = "")
-        : _text(std::move(text)), _event(std::make_optional<Event<std::string> >(std::move(event))),
+    Line::Line(std::string text, std::string eventName, std::string eventArg = "")
+        : _text(std::move(text)), _eventName(std::make_optional<std::string>(std::move(eventName))),
           _eventArg(std::move(eventArg))
     {}
 
@@ -16,27 +16,41 @@ namespace Scenes
         : _text(std::move(text))
     {}
 
-    void Line::readLine(std::ostream& stream)
+    void Line::readLine(std::ostream& stream, EventMap& events)
     {
         stream << _text;
-        if (_event.has_value())
-            (*_event)(std::move(_eventArg));
+        if (_eventName.has_value())
+            try
+            {
+                (events.at(_eventName.value()))(_eventArg);
+            } catch (std::out_of_range&) {}
     }
 
-    const std::optional<Event<std::string> >& Line::event() const noexcept
+    const std::optional<std::string>& Line::eventName() const noexcept
     {
-        return _event;
+        return _eventName;
     }
+
+
 
     const std::string& Line::text() const noexcept
     {
         return _text;
     }
 
+    std::optional<Event<std::string>> Line::event(const EventMap& events) const noexcept
+    {
+        if (!_eventName)
+            return {};
+
+        auto event =  events.find(_eventName.value());
+        return event == events.end() ? std::optional<Event<std::string> >() : std::make_optional(event->second);
+    }
+
     bool Line::operator==(const Line& rhs) const
     {
         return _text == rhs._text &&
-               _event == rhs._event &&
+               _eventName == rhs._eventName &&
                _eventArg == rhs._eventArg;
     }
 
@@ -45,4 +59,8 @@ namespace Scenes
         return !(rhs == *this);
     }
 
+    const std::string& Line::eventArg() const noexcept
+    {
+        return _eventArg;
+    }
 } // Scenes

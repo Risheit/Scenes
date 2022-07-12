@@ -15,6 +15,7 @@ protected:
     const std::deque<Line> lineQueue{
         { Line("Line 1"), Line("Line 2"), Line("Line 3"), Line("Line 4"), Line("Line 5") }
     };
+    EventMap events{};
 
     SectionTests()
     {
@@ -42,22 +43,22 @@ protected:
             std::move(conditions)
         };
     }
-};
 
-std::deque<Line> sectionReadResult(Section section)
-{
-    std::stringstream ss;
-    std::deque<Line> actual{};
-
-    while (section.isActive())
+    std::deque<Line> sectionReadResult(Section section)
     {
-        section.readLine(ss);
-        actual.emplace_back(ss.str());
-        ss.str("");
-    }
+        std::stringstream ss;
+        std::deque<Line> actual{};
 
-    return actual;
-}
+        while (section.isActive())
+        {
+            section.readLine(ss, events);
+            actual.emplace_back(ss.str());
+            ss.str("");
+        }
+
+        return actual;
+    }
+};
 
 TEST_F(SectionTests, TestSectionWithNoConditions)
 {
@@ -337,4 +338,9 @@ TEST_F(SectionTests, TestSectionWithMultipleConditions)
     );
 
     EXPECT_EQ(sectionReadResult(section), lineQueue);
+}
+
+TEST_F(SectionTests, IsMoveConstructible)
+{
+    EXPECT_TRUE(std::is_move_constructible<Section>::value);
 }

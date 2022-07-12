@@ -65,9 +65,9 @@ namespace Scenes
 
                               }) {}
 
-    void Section::readLine(std::ostream& stream) noexcept
+    void Section::readLine(std::ostream& stream, EventMap& events) noexcept
     {
-        _lines.front().readLine(stream);
+        _lines.front().readLine(stream, events);
         _lines.pop();
     }
 

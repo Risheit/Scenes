@@ -237,7 +237,8 @@ namespace Scenes
          * before calling @c readLine().
          */
         void readLine(
-            std::ostream& stream
+            std::ostream& stream,
+            EventMap& events
         ) noexcept;
 
         /**
