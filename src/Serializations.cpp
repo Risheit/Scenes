@@ -6,10 +6,10 @@ namespace nlohmann
 {
     Scenes::Line adl_serializer<Scenes::Line>::from_json(const json& j)
     {
-        if (j.at("event") == nullptr)
+        if (!j.contains("event"))
             return {j.at("text")};
         else
-            return {j.at("text"), j.at("event"), j.at("arg")};
+            return {j.at("text"), j.at("event"), j.value("arg", "")};
     }
 
     void adl_serializer<Scenes::Line>::to_json(json& j, Scenes::Line line)
