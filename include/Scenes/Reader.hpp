@@ -119,7 +119,7 @@ namespace Scenes
 
         const std::filesystem::path _sceneLoc; //!< The path to the directory of the default Scene files to query.
         std::filesystem::path _saveLoc; //!< The path that Reader can save to.
-        const std::string _startScene;
+        const std::string _startScene; //!< The name of the scene that Reader will open first.
         std::string _nextScene; //!< The name of the next Scene file to read.
 
         EventMap _events; //!< Map between user-defined Event names to the Events themselves.
