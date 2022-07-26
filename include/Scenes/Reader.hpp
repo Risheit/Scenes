@@ -106,16 +106,11 @@ namespace Scenes
             std::string saveLoc
         );
 
-        // TODO: Save Reader to saveLoc.
-        //  Save section parts individually
-        //  Save position in which Scene File
-        //  Save Event/Scene Logs
-
     private:
         size_t _linesRead; //!< The lines read so far into the game.
         EventLog _eventLog; //!< A log of recorded events.
         Log _sceneLog; //!< A log of recorded Scenes.
-        std::queue<Section> _scene; //!< Queue of sections that Reader reads through.
+        std::deque<Section> _scene; //!< Queue of sections that Reader reads through.
 
         const std::filesystem::path _sceneLoc; //!< The path to the directory of the default Scene files to query.
         std::filesystem::path _saveLoc; //!< The path that Reader can save to.

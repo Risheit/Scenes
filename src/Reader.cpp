@@ -10,6 +10,11 @@
 #include "Serializations.hpp"
 #include "pch.h"
 
+// TODO: Save Reader to saveLoc.
+//  Save section parts individually
+//  Save Event/Scene Logs
+//  Save starting scene file into _saveLoc with read sections removed.
+
 namespace Scenes
 {
 #pragma region Add Events
@@ -109,8 +114,6 @@ namespace Scenes
 #pragma endregion
 
 #pragma region File Manipulation
-
-
     namespace
     {
         bool isDirectory(const std::filesystem::path& path, const std::string& name)
@@ -167,6 +170,18 @@ namespace Scenes
         return true;
     }
 
+    bool Reader::saveScene()
+    {
+        const static std::filesystem::path sceneSave{ "Globals" };
+        auto globals = openSceneFile(sceneSave, _saveLoc);
+        if (!globals)
+            return false;
+
+        for (auto& section : std::deque<Section>(_scene))
+        {
+
+        }
+    }
 #pragma endregion
 
     void Reader::readSectionIfValid(std::ostream& stream)
